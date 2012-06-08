@@ -1,0 +1,39 @@
+!!! 5
+html
+  head
+    title Kiln Example
+  body
+
+    if errors.length
+      div
+        p Errors!
+        ul
+          for error in errors
+            li= error
+
+    form(method='POST')
+      div
+        label(for='first') First
+        input(type='text', name='first')
+      div
+        label(for='middle') Middle
+        input(type='text', name='middle')
+      div
+        label(for='last') Last
+        input(type='text', name='last')
+      div
+        label(for='address[street1]') Street1
+        input(type='text', name='address[street1]')
+      div
+        label(for='address[street2]') Street2
+        input(type='text', name='address[street2]')
+      div
+        label(for='address[zip]') Zip
+        input(type='text', name='address[zip]')
+      div
+        input(type='submit', value='Submit')
+
+    if result
+      div
+        p Success!
+        pre=result
