@@ -10,6 +10,27 @@ TSA is a node.js library designed to take JSON input and:
 
 It has been designed with usage in an Express-based JSON REST API in mind, and allows you to easily pass it into your route as middleware.
 
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+* Usage : [Using TSA Directly](#using-tsa-directly)
+* Usage : [Using TSA via Express Middleware](#using-tsa-via-express-middleware)
+* [Creating Guards](#creating-guards)
+* Creating Guards : [Nested Guards](#nested-guards)
+* Creating Guards : [Required Fields](#required-fields)
+* Creating Guards : [Optional Fields](#optional-fields)
+* Creating Guards : [Whitelisting](#whitelisting)
+* Creating Guards : [Custom Validations](#custom-validations)
+* Creating Guards : [Default Values](#default-values)
+* Creating Guards : [Transformations](#transformations)
+* Creating Guards : [Rename Fields](#rename-fields)
+* Creating Guards : [Combinations](#combinations)
+* Creating Guards : [Error Handling](#error-handling)
+* [Test](#test)
+* [License](#license)
+* [Author](#author)
+
 ## Installation
 
 ```bash
@@ -47,7 +68,7 @@ guard().frisk(input, function(err, result){
 });
 ```
 
-### Using TSA Via Express Middleware
+### Using TSA via Express Middleware
 
 Create a guard:
 
@@ -217,7 +238,7 @@ guard().frisk(input, function(err, result){
 });
 ```
 
-### Rename Field
+### Rename Fields
 
 ```javascript
 var tsa = require('tsa');
