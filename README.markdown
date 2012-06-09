@@ -171,7 +171,20 @@ guard.frisk(input, function(err, result){
 
 ### Transformations
 
-*TODO*
+```javascript
+var tsa = require('tsa');
+var toUpper = function(input, cb){
+  cb(null, input.toUpperCase());
+};
+var guard = tsa({
+  foo: tsa.field({transform: toUpper})
+});
+var input = { foo: 'bar' };
+guard.frisk(input, function(err, result){
+  // err === null
+  // result.foo === 'BAR'
+});
+```
 
 ## Test
 
