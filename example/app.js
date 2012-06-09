@@ -14,7 +14,7 @@ app.get('/', function(req, res){
   res.render('index', {result: null, errors: []});
 });
 
-app.post('/', personRecipe.middleware, function(req, res){
+app.post('/', personRecipe.middleware(), function(req, res){
   res.render('index', {result: JSON.stringify(req.kiln), errors: []});
 });
 
