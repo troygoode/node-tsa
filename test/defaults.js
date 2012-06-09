@@ -39,4 +39,23 @@ describe('Default Values', function(){
       done();
     });
   });
+
+  it('supports executing a function to retrieve default value', function(done){
+    //arrange
+    var guard = tsa({
+      foo: tsa.field({ default: function(){ return 'bar'; } })
+    });
+    var input = {};
+
+    //act
+    guard.frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+      should.exist(result.foo);
+      result.foo.should.equal('bar');
+
+      done();
+    });
+  });
 });

@@ -152,6 +152,23 @@ guard.frisk(input, function(err, result){
 });
 ```
 
+Optionally, the default value can be a function which will be executed by tsa:
+
+```javascript
+var tsa = require('tsa');
+var now = function(){
+  return new Date();
+};
+var guard = tsa({
+  foo: tsa.field({default: now})
+});
+var input = {};
+guard.frisk(input, function(err, result){
+  // err === null
+  // result.foo === a Date object
+});
+```
+
 ### Transformations
 
 *TODO*
