@@ -1,7 +1,7 @@
 var should = require('should')
   , tsa = require('../');
 
-describe('Required Field', function(){
+describe('Custom Validations', function(){
   var mustBeUpper = function(value, cb){
     if(value === value.toUpperCase()){
       cb();
@@ -40,7 +40,7 @@ describe('Required Field', function(){
     guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
-      err[0].should.equal('not uppercase');
+      err[0].error.should.equal('not uppercase');
       should.not.exist(result);
 
       done();

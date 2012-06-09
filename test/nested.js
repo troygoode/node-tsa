@@ -44,7 +44,9 @@ describe('Nested Guards', function(){
       //assert
       should.exist(err);
       err.length.should.equal(1);
-      err[0].should.be.a('string');
+      err[0].key.should.equal('bar');
+      err[0].error.key.should.equal('baz');
+      err[0].error.error.should.be.a('string');
       should.not.exist(result);
 
       done()
@@ -187,7 +189,9 @@ describe('Nested Guards - Person', function(){
       //assert
       should.exist(err);
       err.length.should.equal(1);
-      err[0].should.be.a('string');
+      err[0].key.should.equal('address');
+      err[0].error.key.should.equal('zip');
+      err[0].error.error.should.be.a('string');
       should.not.exist(result);
 
       done();
@@ -209,6 +213,9 @@ describe('Nested Guards - Person', function(){
       should.exist(err);
       err.should.be.an.instanceof(Array);
       err.length.should.equal(2);
+      err[0].key.should.equal('last');
+      err[1].key.should.equal('address');
+      err[1].error.key.should.equal('zip');
       should.not.exist(result);
 
       done();

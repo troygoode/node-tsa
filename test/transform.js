@@ -38,7 +38,7 @@ describe('Transformations', function(){
     guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
-      err[0].should.equal('some error');
+      err[0].error.should.equal('some error');
       should.not.exist(result);
 
       done();
