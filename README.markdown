@@ -238,6 +238,33 @@ guard.frisk(input, function(err, result){
 });
 ```
 
+### Error Handling
+
+Errors for nested structures are returned like so:
+
+```json
+[
+    {key: 'first', error: 'Required field not provided.'}
+  , {key: 'address', error: [
+        {key: 'street1', error: 'Required field not provided.'}
+      , {key: 'zip', error: 'Required field not provided.'}
+    ]}
+]
+```
+
+While this is a very structured format, it isn't always the easiest for
+doing things like highlighting form fields that have errors. In those
+situations you can pass the error structure into the `tsa.flattenErrors`
+method to get back something like this:
+
+```json
+[
+    {key: 'first', error: 'Required field not provided.'}
+  , {key: 'address[street1]', error: 'Required field not provided.'}
+  , {key: 'address[zip]', error: 'Required field not provided.'}
+]
+```
+
 ## Test
 
 Run tests via mocha:
