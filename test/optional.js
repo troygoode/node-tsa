@@ -22,7 +22,7 @@ describe('Optional Field', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -37,7 +37,7 @@ describe('Optional Field', function(){
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -53,12 +53,12 @@ describe('Optional Field', function(){
       bar: tsa.optional()
     });
     var guard = tsa({
-      foo: innerGuard
+      foo: innerGuard()
     });
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

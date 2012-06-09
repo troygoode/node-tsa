@@ -15,7 +15,7 @@ app.get('/', function(req, res){
   res.render('index', {result: null, errors: []});
 });
 
-app.post('/', personGuard.middleware(), function(req, res){
+app.post('/', personGuard().middleware(), function(req, res){
   res.render('index', {result: JSON.stringify(req.body), errors: []});
 });
 

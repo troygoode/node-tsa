@@ -11,7 +11,7 @@ describe('Default Values', function(){
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -29,7 +29,7 @@ describe('Default Values', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -48,7 +48,7 @@ describe('Default Values', function(){
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

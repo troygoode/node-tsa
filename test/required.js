@@ -13,7 +13,7 @@ describe('Required Field', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.length.should.equal(1);
@@ -29,14 +29,14 @@ describe('Required Field', function(){
     //arrange
     var innerGuard = tsa({
       bar: tsa.optional()
-    }, {required: true});
+    });
     var guard = tsa({
-      foo: innerGuard
+      foo: innerGuard({ required: true })
     });
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.length.should.equal(1);

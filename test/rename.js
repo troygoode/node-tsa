@@ -13,7 +13,7 @@ describe('Rename Field', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -29,14 +29,14 @@ describe('Rename Field', function(){
     //arrange
     var innerGuard = tsa({
       bar: tsa.optional()
-    }, {rename: 'baz'});
+    });
     var guard = tsa({
-      foo: innerGuard
+      foo: innerGuard({ rename: 'baz' })
     });
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

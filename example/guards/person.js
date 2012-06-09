@@ -28,5 +28,5 @@ module.exports = tsa({
   , middle: tsa.transform(justFirstCharacter)
   , last: tsa.required()
   , email: tsa.validate(isEmail)
-  , address: address
+  , address: address()
 });

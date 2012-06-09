@@ -20,7 +20,7 @@ describe('Custom Validations', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -37,7 +37,7 @@ describe('Custom Validations', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err[0].error.should.equal('not uppercase');
@@ -57,14 +57,14 @@ describe('Custom Validations', function(){
     };
     var innerGuard = tsa({
       bar: tsa.required()
-    }, {validate: v});
+    });
     var guard = tsa({
-      foo: innerGuard
+      foo: innerGuard({ validate: v })
     });
     var input = {foo: {bar: 'blah'}};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.length.should.equal(1);
@@ -84,14 +84,14 @@ describe('Custom Validations', function(){
     };
     var innerGuard = tsa({
       bar: tsa.required()
-    }, {validate: v});
+    });
     var guard = tsa({
-      foo: innerGuard
+      foo: innerGuard({ validate: v })
     });
     var input = {foo: {bar: 'blah2'}};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

@@ -17,7 +17,7 @@ describe('Middleware', function(){
     };
 
     //act
-    guard.middleware()(req, null, function(err){
+    guard().middleware()(req, null, function(err){
       //assert
       should.not.exist(err);
       should.exist(req.body);
@@ -39,7 +39,7 @@ describe('Middleware', function(){
     };
 
     //act
-    guard.middleware()(req, null, function(err){
+    guard().middleware()(req, null, function(err){
       //assert
       should.exist(err);
       err.should.be.an.instanceof(Array);
@@ -67,7 +67,7 @@ describe('Middleware', function(){
     };
 
     //act
-    guard.middleware(handler)(req, null, function(err){
+    guard().middleware(handler)(req, null, function(err){
       throw 'shouldn\'t reach this';
     });
   });

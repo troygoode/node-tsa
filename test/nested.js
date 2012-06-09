@@ -8,7 +8,7 @@ describe('Nested Guards', function(){
   });
   var guard = tsa({
       foo: tsa.required()
-    , bar: innerGuard
+    , bar: innerGuard()
   });
 
   it('works when all values supplied', function(done){
@@ -19,7 +19,7 @@ describe('Nested Guards', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -40,7 +40,7 @@ describe('Nested Guards', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.length.should.equal(1);
@@ -62,7 +62,7 @@ describe('Nested Guards', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.should.be.an.instanceof(Array);
@@ -80,11 +80,11 @@ describe('Nested Guards - Further Nesting', function(){
   });
   var innerGuard = tsa({
       baz: tsa.required()
-    , blah: moreInnerGuard
+    , blah: moreInnerGuard()
   });
   var guard = tsa({
       foo: tsa.required()
-    , bar: innerGuard
+    , bar: innerGuard()
   });
 
   it('works when all values supplied', function(done){
@@ -100,7 +100,7 @@ describe('Nested Guards - Further Nesting', function(){
     };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -133,7 +133,7 @@ describe('Nested Guards - Person', function(){
     };
 
     //act
-    person.frisk(input, function(err, result){
+    person().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -160,7 +160,7 @@ describe('Nested Guards - Person', function(){
     };
 
     //act
-    person.frisk(input, function(err, result){
+    person().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -186,7 +186,7 @@ describe('Nested Guards - Person', function(){
     };
 
     //act
-    person.frisk(input, function(err, result){
+    person().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.length.should.equal(1);
@@ -210,7 +210,7 @@ describe('Nested Guards - Person', function(){
     };
 
     //act
-    person.frisk(input, function(err, result){
+    person().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.should.be.an.instanceof(Array);

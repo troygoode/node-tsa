@@ -5,5 +5,5 @@ module.exports = tsa({
     first: tsa.required()
   , middle: tsa.optional()
   , last: tsa.required()
-  , address: address
+  , address: address()
 });

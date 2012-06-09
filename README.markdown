@@ -38,7 +38,7 @@ var input = {
     property1: 'foo'
   , property4: 'bar'
 };
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === null
   // result.property1 === 'foo'
   // result.property2 === undefined
@@ -68,7 +68,7 @@ app.use(express.bodyParser());
 Add that guard's middleware to your route:
 
 ```javascript
-app.post('/foo', guard.middleware(), function(req, res){
+app.post('/foo', guard().middleware(), function(req, res){
   // req.body is the whitelisted, validated, transformed version of the input from req.body
 });
 
@@ -80,7 +80,7 @@ app.error(function(err, req, res, next){
 Alternatively you can handle the errors on a per-route basis instead of globally:
 
 ```javascript
-app.post('/foo', guard.middleware(function(err, req, res, next){
+app.post('/foo', guard().middleware(function(err, req, res, next){
   // return a 400, show an error page, ignore by calling next, whatever
 }), function(req, res){
   // req.body is the whitelisted, validated, transformed version of the input from req.body
@@ -99,7 +99,7 @@ var address = tsa({
 });
 var person = tsa({
     name: tsa.required()
-  , address: address
+  , address: address()
 });
 ```
 
@@ -111,7 +111,7 @@ var guard = tsa({
   property1: tsa.field({ required: true }) // or: tsa.required()
 });
 var input = {};
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === instanceof Array
   // err[0] === {key: 'property1', error: 'required field property1 not supplied'}
 });
@@ -125,7 +125,7 @@ var guard = tsa({
   property1: tsa.field() // or: tsa.optional()
 });
 var input = {};
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === null
   // result === {}
 });
@@ -142,7 +142,7 @@ var input = {
     property1: 'foo'
   , property2: 'bar'
 };
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // result.property1 === 'foo'
   // result has no property2 key
 });
@@ -163,7 +163,7 @@ var guard = tsa({
   foo: tsa.field({ validate: mustBeUpper }) // or: tsa.validate(mustBeUpper)
 });
 var input = { foo: 'bar' };
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err[0] === {key: 'foo', error: 'not uppercase!'}
   // result === null
 });
@@ -177,7 +177,7 @@ var guard = tsa({
   foo: tsa.field({ default: 'bar' }) // or: tsa.default('bar')
 });
 var input = {};
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === null
   // result.foo === 'bar'
 });
@@ -194,7 +194,7 @@ var guard = tsa({
   foo: tsa.field({ default: now }) // or: tsa.default(now)
 });
 var input = {};
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === null
   // result.foo === a Date object
 });
@@ -211,7 +211,7 @@ var guard = tsa({
   foo: tsa.field({ transform: toUpper }) // or: tsa.transform(toUpper)
 });
 var input = { foo: 'bar' };
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === null
   // result.foo === 'BAR'
 });
@@ -225,7 +225,7 @@ var guard = tsa({
   foo: tsa.field({ rename: 'bar' }) // or: tsa.rename('bar')
 });
 var input = { foo: 'blah' };
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // result.foo === undefined
   // result.bar === 'blah'
 });
@@ -246,7 +246,7 @@ var guard = tsa({
   // or: tsa.transform(toUpper, {required: true})
 });
 var input = { foo: 'bar' };
-guard.frisk(input, function(err, result){
+guard().frisk(input, function(err, result){
   // err === null
   // result.foo === 'BAR'
 });

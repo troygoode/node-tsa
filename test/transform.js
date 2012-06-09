@@ -13,7 +13,7 @@ describe('Transformations', function(){
     var input = { foo: 'bar' };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -35,7 +35,7 @@ describe('Transformations', function(){
     var input = { foo: 'bar' };
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.exist(err);
       err[0].error.should.equal('some error');
@@ -53,14 +53,14 @@ describe('Transformations', function(){
     };
     var innerGuard = tsa({
       bar: tsa.optional()
-    }, {transform: t});
+    });
     var guard = tsa({
-      foo: innerGuard
+      foo: innerGuard({ transform: t })
     });
     var input = {};
 
     //act
-    guard.frisk(input, function(err, result){
+    guard().frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
