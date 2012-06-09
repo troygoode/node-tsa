@@ -38,7 +38,7 @@ var input = {
   , property3: 'bar'
 };
 guard.frisk(input, function(err, result){
-  // err is null
+  // err === null
   // result.property1 === 'foo'
   // result.property2 === undefined
   // there is no key result.property3 because it isn't in the whitelist
@@ -67,7 +67,7 @@ Add that guard's middleware to your route:
 
 ```javascript
 app.post('/foo', guard.middleware(), function(req, res){
-  // req.tsa is the whitelisted, validated, transformed version of the input from req.body
+  // req.body is the whitelisted, validated, transformed version of the input from req.body
 });
 
 app.error(function(err, req, res, next){
@@ -99,7 +99,7 @@ var guard = tsa({
 var input = {};
 guard.frisk(input, function(err, result){
   // err === instanceof Array
-  // err[0] === 'required field property1 not supplied'
+  // err[0] === {key: 'property1', error: 'required field property1 not supplied'}
 });
 ```
 
@@ -150,7 +150,7 @@ var guard = tsa({
 });
 var input = { foo: 'bar' };
 guard.frisk(input, function(err, result){
-  // err[0] === 'not uppercase!'
+  // err[0] === {key: 'foo', error: 'not uppercase!'}
   // result === null
 });
 ```
