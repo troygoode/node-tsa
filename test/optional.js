@@ -46,4 +46,26 @@ describe('Optional Field', function(){
       done();
     });
   });
+
+  it('works with nested guards', function(done){
+    //arrange
+    var innerGuard = tsa({
+      bar: tsa.optional()
+    });
+    var guard = tsa({
+      foo: innerGuard
+    });
+    var input = {};
+
+    //act
+    guard.frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+      should.exist(result.foo);
+      isEmptyHash(result.foo).should.be.true;
+
+      done();
+    });
+  });
 });

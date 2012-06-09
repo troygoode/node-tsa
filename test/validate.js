@@ -46,4 +46,57 @@ describe('Custom Validations', function(){
       done();
     });
   });
+
+  it('works with nested guards - negative', function(done){
+    //arrange
+    var v = function(json, cb){
+      if(json.bar === 'blah')
+        cb('can\'t equal blah');
+      else
+        cb();
+    };
+    var innerGuard = tsa({
+      bar: tsa.required()
+    }, {validate: v});
+    var guard = tsa({
+      foo: innerGuard
+    });
+    var input = {foo: {bar: 'blah'}};
+
+    //act
+    guard.frisk(input, function(err, result){
+      //assert
+      should.exist(err);
+      err.length.should.equal(1);
+      should.not.exist(result);
+
+      done();
+    });
+  });
+
+  it('works with nested guards - positive', function(done){
+    //arrange
+    var v = function(json, cb){
+      if(json.bar === 'blah')
+        cb('can\'t equal blah');
+      else
+        cb();
+    };
+    var innerGuard = tsa({
+      bar: tsa.required()
+    }, {validate: v});
+    var guard = tsa({
+      foo: innerGuard
+    });
+    var input = {foo: {bar: 'blah2'}};
+
+    //act
+    guard.frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+
+      done();
+    });
+  });
 });

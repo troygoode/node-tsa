@@ -24,4 +24,25 @@ describe('Required Field', function(){
       done();
     });
   });
+
+  it('works with nested guards', function(done){
+    //arrange
+    var innerGuard = tsa({
+      bar: tsa.optional()
+    }, {required: true});
+    var guard = tsa({
+      foo: innerGuard
+    });
+    var input = {};
+
+    //act
+    guard.frisk(input, function(err, result){
+      //assert
+      should.exist(err);
+      err.length.should.equal(1);
+      should.not.exist(result);
+
+      done();
+    });
+  });
 });

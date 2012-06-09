@@ -44,4 +44,31 @@ describe('Transformations', function(){
       done();
     });
   });
+
+  it('works with nested guards', function(done){
+    //arrange
+    var t = function(json, cb){
+      json.color = 'red';
+      cb(null, json);
+    };
+    var innerGuard = tsa({
+      bar: tsa.optional()
+    }, {transform: t});
+    var guard = tsa({
+      foo: innerGuard
+    });
+    var input = {};
+
+    //act
+    guard.frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+      should.exist(result.foo);
+      should.exist(result.foo.color);
+      result.foo.color.should.equal('red');
+
+      done();
+    });
+  });
 });
