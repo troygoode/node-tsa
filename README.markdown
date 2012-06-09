@@ -136,7 +136,24 @@ guard.frisk(input, function(err, result){
 
 ### Custom Validations
 
-*TODO*
+```javascript
+var tsa = require('tsa');
+var mustBeUpper = function(input, cb){
+  if(input.toUpperCase() === input){
+    cb(); // yes, this is uppercase
+  }else{
+    cb('not uppercase!'); // oh noes!
+  }
+};
+var guard = tsa({
+  foo: tsa.field({ validate: mustBeUpper })
+});
+var input = { foo: 'bar' };
+guard.frisk(input, function(err, result){
+  // err[0] === 'not uppercase!'
+  // result === null
+});
+```
 
 ### Default Values
 
