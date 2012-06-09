@@ -1,6 +1,14 @@
 # tsa
 
-**Guard your REST API with a bit of fascism.**
+*Guard your REST API with a bit of fascism.*
+
+TSA is a node.js library designed to take JSON input and:
+* filter it against a whitelist
+* validate it *(todo)*
+* transform it *(todo)*
+* provide default values to it *(todo)*
+
+It has been designed with usage in an Express-based JSON REST API in mind, and allows you to easily pass it into your route as middleware.
 
 ## Installation
 
@@ -33,7 +41,7 @@ guard.frisk(input, function(err, result){
   // err is null
   // result.property1 === 'foo'
   // result.property2 === undefined
-  // there is no key result.property3
+  // there is no key result.property3 because it isn't in the whitelist
 });
 ```
 
@@ -67,7 +75,7 @@ app.error(function(err, req, res, next){
 });
 ```
 
-### Complex Objects
+### Nested Guards
 
 ```javascript
 var tsa = require('tsa');
@@ -80,6 +88,63 @@ var person = tsa({
   , address: address
 });
 ```
+
+### Required Field
+
+```javascript
+var tsa = require('tsa');
+var guard = tsa({
+  property1: tsa.required()
+});
+var input = {};
+guard.frisk(input, function(err, result){
+  // err === instanceof Array
+  // err[0] === 'required field property1 not supplied'
+});
+```
+
+### Optional Field
+
+```javascript
+var tsa = require('tsa');
+var guard = tsa({
+  property1: tsa.optional()
+});
+var input = {};
+guard.frisk(input, function(err, result){
+  // err === null
+  // result === {}
+});
+```
+
+### Whitelisting
+
+```javascript
+var tsa = require('tsa');
+var guard = tsa({
+  property1: tsa.required()
+});
+var input = {
+    property1: 'foo'
+  , property2: 'bar'
+};
+guard.frisk(input, function(err, result){
+  // result.property1 === 'foo'
+  // result has no property2 key
+});
+```
+
+### Custom Validations
+
+*TODO*
+
+### Default Values
+
+*TODO*
+
+### Transformations
+
+*TODO*
 
 ## Test
 
