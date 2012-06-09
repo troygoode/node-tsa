@@ -6,7 +6,7 @@ describe('Required Field', function(){
     bar: tsa.required()
   });
 
-  it('required field is not in input', function(done){
+  it('error array is returned if required field is not in input', function(done){
     //arrange
     var input = {
       baz: 'blah'
@@ -16,6 +16,7 @@ describe('Required Field', function(){
     guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
+      err.length.should.equal(1);
       should.not.exist(result);
 
       done();
