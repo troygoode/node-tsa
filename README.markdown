@@ -217,6 +217,20 @@ guard.frisk(input, function(err, result){
 });
 ```
 
+### Rename Field
+
+```javascript
+var tsa = require('tsa');
+var guard = tsa({
+  foo: tsa.field({ rename: 'bar' }) // or: tsa.rename('bar')
+});
+var input = { foo: 'blah' };
+guard.frisk(input, function(err, result){
+  // result.foo === undefined
+  // result.bar === 'blah'
+});
+```
+
 ### Combinations
 
 You can combine any and all of the above like so:
