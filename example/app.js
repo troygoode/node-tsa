@@ -1,4 +1,5 @@
 var express = require('express')
+  , tsa = require('../')
   , personGuard = require('./guards/person');
 
 var app = express.createServer();
@@ -19,9 +20,7 @@ app.post('/', personGuard.middleware(), function(req, res){
 });
 
 app.error(function(err, req, res, next){
-  res.render('index', {result: null, errors: err.map(function(e){
-    return JSON.stringify(e);
-  })});
+  res.render('index', {result: null, errors: tsa.flattenErrors(err)});
 });
 
 app.listen(3000, function(){
