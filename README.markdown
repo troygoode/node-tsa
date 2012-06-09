@@ -4,9 +4,9 @@
 
 TSA is a node.js library designed to take JSON input and:
 * filter it against a whitelist
-* validate it *(todo)*
-* transform it *(todo)*
-* provide default values to it *(todo)*
+* validate it
+* transform it
+* provide default values
 
 It has been designed with usage in an Express-based JSON REST API in mind, and allows you to easily pass it into your route as middleware.
 
@@ -27,6 +27,7 @@ var tsa = require('tsa');
 var guard = tsa({
     property1: tsa.required()
   , property2: tsa.optional()
+  , property3: tsa.default('blah')
 });
 ```
 
@@ -35,13 +36,14 @@ Validate input against guard:
 ```javascript
 var input = {
     property1: 'foo'
-  , property3: 'bar'
+  , property4: 'bar'
 };
 guard.frisk(input, function(err, result){
   // err === null
   // result.property1 === 'foo'
   // result.property2 === undefined
-  // there is no key result.property3 because it isn't in the whitelist
+  // result.property3 === 'blah'
+  // result.property4 === undefined
 });
 ```
 
@@ -75,6 +77,8 @@ app.error(function(err, req, res, next){
 });
 ```
 
+## Features
+
 ### Nested Guards
 
 ```javascript
@@ -89,12 +93,12 @@ var person = tsa({
 });
 ```
 
-### Required Field
+### Required Fields
 
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  property1: tsa.required()
+  property1: tsa.field({ required: true }) // or: tsa.required()
 });
 var input = {};
 guard.frisk(input, function(err, result){
@@ -103,12 +107,12 @@ guard.frisk(input, function(err, result){
 });
 ```
 
-### Optional Field
+### Optional Fields
 
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  property1: tsa.optional()
+  property1: tsa.field() // or: tsa.optional()
 });
 var input = {};
 guard.frisk(input, function(err, result){
@@ -146,7 +150,7 @@ var mustBeUpper = function(input, cb){
   }
 };
 var guard = tsa({
-  foo: tsa.field({ validate: mustBeUpper })
+  foo: tsa.field({ validate: mustBeUpper }) // or: tsa.validate(mustBeUpper)
 });
 var input = { foo: 'bar' };
 guard.frisk(input, function(err, result){
@@ -160,7 +164,7 @@ guard.frisk(input, function(err, result){
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  foo: tsa.field({default: 'bar'})
+  foo: tsa.field({ default: 'bar' }) // or: tsa.default('bar')
 });
 var input = {};
 guard.frisk(input, function(err, result){
@@ -177,7 +181,7 @@ var now = function(){
   return new Date();
 };
 var guard = tsa({
-  foo: tsa.field({default: now})
+  foo: tsa.field({ default: now }) // or: tsa.default(now)
 });
 var input = {};
 guard.frisk(input, function(err, result){
@@ -194,7 +198,7 @@ var toUpper = function(input, cb){
   cb(null, input.toUpperCase());
 };
 var guard = tsa({
-  foo: tsa.field({transform: toUpper})
+  foo: tsa.field({ transform: toUpper }) // or: tsa.transform(toUpper)
 });
 var input = { foo: 'bar' };
 guard.frisk(input, function(err, result){
