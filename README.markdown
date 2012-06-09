@@ -207,6 +207,27 @@ guard.frisk(input, function(err, result){
 });
 ```
 
+### Combinations
+
+You can combine any and all of the above like so:
+
+```javascript
+var tsa = require('tsa');
+var toUpper = function(input, cb){
+  cb(null, input.toUpperCase());
+};
+var guard = tsa({
+  foo: tsa.field({ required: true, transform: toUpper })
+  // or: tsa.required({ transform: toUpper })
+  // or: tsa.transform(toUpper, {required: true})
+});
+var input = { foo: 'bar' };
+guard.frisk(input, function(err, result){
+  // err === null
+  // result.foo === 'BAR'
+});
+```
+
 ## Test
 
 Run tests via mocha:
