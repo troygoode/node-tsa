@@ -140,7 +140,17 @@ guard.frisk(input, function(err, result){
 
 ### Default Values
 
-*TODO*
+```javascript
+var tsa = require('tsa');
+var guard = tsa({
+  foo: tsa.field({default: 'bar'})
+});
+var input = {};
+guard.frisk(input, function(err, result){
+  // err === null
+  // result.foo === 'bar'
+});
+```
 
 ### Transformations
 
