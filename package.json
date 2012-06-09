@@ -1,7 +1,7 @@
 {
     "name": "tsa"
   , "author": "Troy Goode <troygoode@gmail.com> (https://github.com/troygoode/)"
-  , "version": "0.1.0"
+  , "version": "1.0.0"
   , "description": "Guard your REST API with a bit of fascism."
   , "keywords": ["json", "REST", "API", "guard", "whitelist", "transform"]
   , "homepage": "https://github.com/troygoode/node-tsa"
