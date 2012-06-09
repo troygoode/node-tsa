@@ -1,7 +1,7 @@
 var should = require('should')
   , person = require('./guards/person');
 
-describe('The Person Recipe', function(){
+describe('Nested Guards', function(){
 
   it('works when all values are passed', function(done){
     //arrange
