@@ -223,7 +223,7 @@ $ cd tsa/
 $ npm install
 $ cd example/
 $ npm install
-$ node app.js
+$ npm start
 $ open http://localhost:3000
 ```
 
