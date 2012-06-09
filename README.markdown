@@ -18,7 +18,7 @@ $ npm install tsa
 
 ## Usage
 
-### Basic Scenario
+### Using TSA Directly
 
 Create a guard:
 
@@ -47,7 +47,7 @@ guard.frisk(input, function(err, result){
 });
 ```
 
-### Express Middleware
+### Using TSA Via Express Middleware
 
 Create a guard:
 
@@ -77,7 +77,7 @@ app.error(function(err, req, res, next){
 });
 ```
 
-## Features
+## Creating Guards
 
 ### Nested Guards
 
