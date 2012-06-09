@@ -77,6 +77,16 @@ app.error(function(err, req, res, next){
 });
 ```
 
+Alternatively you can handle the errors on a per-route basis instead of globally:
+
+```javascript
+app.post('/foo', guard.middleware(function(err, req, res, next){
+  // return a 400, show an error page, ignore by calling next, whatever
+}), function(req, res){
+  // req.body is the whitelisted, validated, transformed version of the input from req.body
+});
+```
+
 ## Creating Guards
 
 ### Nested Guards

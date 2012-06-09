@@ -44,9 +44,31 @@ describe('Middleware', function(){
       should.exist(err);
       err.should.be.an.instanceof(Array);
       err.length.should.equal(1);
-      should.not.exist(req.tsa);
 
       done();
+    });
+  });
+
+  it('passes errors to error handler when specified', function(done){
+    //arrange
+    var input = {
+      bar: 'baz'
+    };
+    var req = {
+      body: input
+    };
+    var handler = function(err){
+      //assert
+      should.exist(err);
+      err.should.be.an.instanceof(Array);
+      err.length.should.equal(1);
+
+      done();
+    };
+
+    //act
+    guard.middleware(handler)(req, null, function(err){
+      throw 'shouldn\'t reach this';
     });
   });
 });

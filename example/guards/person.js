@@ -25,8 +25,8 @@ var isEmail = function(input, cb){
 
 module.exports = tsa({
     first: tsa.required()
-  , middle: tsa.field({ transform: justFirstCharacter })
+  , middle: tsa.transform(justFirstCharacter)
   , last: tsa.required()
-  , email: tsa.field({ validate: isEmail })
+  , email: tsa.validate(isEmail)
   , address: address
 });
