@@ -1,10 +1,10 @@
 var should = require('should')
-  , kiln = require('../');
+  , tsa = require('../');
 
 describe('Mix of Required & Optional Fields', function(){
-  var recipe = kiln({
-      bar1: kiln.required()
-    , bar2: kiln.optional()
+  var guard = tsa({
+      bar1: tsa.required()
+    , bar2: tsa.optional()
   });
 
   it('works when all fields are present', function(done){
@@ -15,7 +15,7 @@ describe('Mix of Required & Optional Fields', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -33,7 +33,7 @@ describe('Mix of Required & Optional Fields', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -51,7 +51,7 @@ describe('Mix of Required & Optional Fields', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
       should.not.exist(result);
@@ -69,7 +69,7 @@ describe('Mix of Required & Optional Fields', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

@@ -1,9 +1,9 @@
 var should = require('should')
-  , kiln = require('../');
+  , tsa = require('../');
 
 describe('Optional Field', function(){
-  var recipe = kiln({
-    bar: kiln.optional()
+  var guard = tsa({
+    bar: tsa.optional()
   });
 
   it('field is in whitelist', function(done){
@@ -13,7 +13,7 @@ describe('Optional Field', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -31,7 +31,7 @@ describe('Optional Field', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

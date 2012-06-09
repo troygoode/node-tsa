@@ -1,9 +1,9 @@
 var should = require('should')
-  , kiln = require('../');
+  , tsa = require('../');
 
 describe('Required Field', function(){
-  var recipe = kiln({
-    bar: kiln.required()
+  var guard = tsa({
+    bar: tsa.required()
   });
 
   it('required field is not in input', function(done){
@@ -13,7 +13,7 @@ describe('Required Field', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
       should.not.exist(result);

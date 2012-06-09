@@ -1,5 +1,5 @@
 var should = require('should')
-  , person = require('./recipes/person');
+  , person = require('./guards/person');
 
 describe('The Person Recipe', function(){
 
@@ -17,7 +17,7 @@ describe('The Person Recipe', function(){
     };
 
     //act
-    person.fire(input, function(err, result){
+    person.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -44,7 +44,7 @@ describe('The Person Recipe', function(){
     };
 
     //act
-    person.fire(input, function(err, result){
+    person.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -70,7 +70,7 @@ describe('The Person Recipe', function(){
     };
 
     //act
-    person.fire(input, function(err, result){
+    person.frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.should.be.a('string');
@@ -90,7 +90,7 @@ describe('The Person Recipe', function(){
     };
 
     //act
-    person.fire(input, function(err, result){
+    person.frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.should.be.an.instanceof(Array);

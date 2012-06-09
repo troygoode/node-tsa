@@ -1,13 +1,13 @@
 var should = require('should')
-  , kiln = require('../');
+  , tsa = require('../');
 
 describe('Complex Object', function(){
-  var innerRecipe = kiln({
-    baz: kiln.required()
+  var innerGuard = tsa({
+    baz: tsa.required()
   });
-  var recipe = kiln({
-      foo: kiln.required()
-    , bar: innerRecipe
+  var guard = tsa({
+      foo: tsa.required()
+    , bar: innerGuard
   });
 
   it('works when all values supplied', function(done){
@@ -18,7 +18,7 @@ describe('Complex Object', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);
@@ -39,7 +39,7 @@ describe('Complex Object', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.should.be.a('string');
@@ -57,7 +57,7 @@ describe('Complex Object', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.exist(err);
       err.should.be.an.instanceof(Array);
@@ -70,16 +70,16 @@ describe('Complex Object', function(){
 });
 
 describe('More Complex Object', function(){
-  var moreInnerRecipe = kiln({
-    fizz: kiln.required()
+  var moreInnerGuard = tsa({
+    fizz: tsa.required()
   });
-  var innerRecipe = kiln({
-      baz: kiln.required()
-    , blah: moreInnerRecipe
+  var innerGuard = tsa({
+      baz: tsa.required()
+    , blah: moreInnerGuard
   });
-  var recipe = kiln({
-      foo: kiln.required()
-    , bar: innerRecipe
+  var guard = tsa({
+      foo: tsa.required()
+    , bar: innerGuard
   });
 
   it('works when all values supplied', function(done){
@@ -95,7 +95,7 @@ describe('More Complex Object', function(){
     };
 
     //act
-    recipe.fire(input, function(err, result){
+    guard.frisk(input, function(err, result){
       //assert
       should.not.exist(err);
       should.exist(result);

@@ -1,5 +1,5 @@
 var express = require('express')
-  , personRecipe = require('./recipes/person');
+  , personGuard = require('./guards/person');
 
 var app = express.createServer();
 app.configure(function(){
@@ -14,8 +14,8 @@ app.get('/', function(req, res){
   res.render('index', {result: null, errors: []});
 });
 
-app.post('/', personRecipe.middleware(), function(req, res){
-  res.render('index', {result: JSON.stringify(req.kiln), errors: []});
+app.post('/', personGuard.middleware(), function(req, res){
+  res.render('index', {result: JSON.stringify(req.tsa), errors: []});
 });
 
 app.error(function(err, req, res, next){
