@@ -20,10 +20,10 @@ describe('Middleware', function(){
     guard.middleware()(req, null, function(err){
       //assert
       should.not.exist(err);
-      should.exist(req.tsa);
-      should.exist(req.tsa.foo);
-      req.tsa.foo.should.equal('blah');
-      should.not.exist(req.tsa.bar);
+      should.exist(req.body);
+      should.exist(req.body.foo);
+      req.body.foo.should.equal('blah');
+      should.not.exist(req.body.bar);
 
       done();
     });

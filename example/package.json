@@ -6,4 +6,7 @@
       "express": "2.x"
     , "jade": "*"
   }
+  , "scripts": {
+      "start": "node app.js"
+  }
 }
