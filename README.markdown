@@ -124,6 +124,19 @@ var person = tsa({
 });
 ```
 
+Nested guards can also be created inline:
+
+```javascript
+var tsa = require('tsa');
+var person = tsa({
+    name: tsa.required()
+  , address: tsa({
+      street1: tsa.required()
+    , street2: tsa.optional()
+  })()
+});
+```
+
 You can validate/transform/etc nested guards either at the definition level, or the usage level:
 
 ```javascript
