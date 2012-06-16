@@ -99,4 +99,35 @@ describe('Custom Validations', function(){
       done();
     });
   });
+
+  it('can supply key name for error', function(done){
+    //arrange
+    var passwordsMustMatch = function(json, cb){
+      if(json.password1 === json.password2)
+        cb();
+      else
+        cb({ key: 'password2', error: 'Passwords must match.' });
+    };
+    var guard = tsa({
+        password1: tsa.required()
+      , password2: tsa.required()
+    }, { validate: passwordsMustMatch });
+    var input = {
+        password1: 'foo'
+      , password2: 'bar'
+    };
+
+    //act
+    guard().frisk(input, function(err, result){
+      //assert
+      should.exist(err);
+      err.should.be.an.instanceof(Array);
+      err.length.should.equal(1);
+      err[0].key.should.equal('password2');
+      err[0].error.should.equal('Passwords must match.');
+      should.not.exist(result);
+
+      done();
+    });
+  });
 });

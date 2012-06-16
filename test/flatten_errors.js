@@ -54,4 +54,22 @@ describe('Flatten Errors', function(){
     flat[1].error.should.equal('blah2');
   });
 
+  it('can flatten to hash', function(){
+    //arrange
+    var errors = [
+      { key: 'foo', error: [
+          { key: 'bar', error: [
+              { key: 'baz', error: 'blahbaz' }
+            , { key: 'baz', error: 'blahba2' }
+          ] }
+        , { key: 'bar2', error: 'blah2' }
+      ] }
+    ];
+
+    //act
+    var flat = tsa.flattenErrors(errors, {hash: true});
+    console.log(flat);
+    flat['foo[bar[baz]]'].join(' ').should.equal('blahbaz blahba2');
+    flat['foo[bar2]'].join(' ').should.equal('blah2');
+  });
 });
