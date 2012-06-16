@@ -226,3 +226,33 @@ describe('Nested Guards - Person', function(){
   });
 
 });
+
+describe('Nested Guards - Inline', function(){
+  var guard = tsa({
+      foo: tsa.required()
+    , bar: tsa({
+        baz: tsa.required()
+      })()
+  });
+
+  it('works when all values supplied', function(done){
+    //arrange
+    var input = {
+      foo: 'foo'
+      , bar: {baz: 'baz'}
+    };
+
+    //act
+    guard().frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+      result.foo.should.equal('foo');
+      should.exist(result.bar);
+      should.exist(result.bar.baz);
+      result.bar.baz.should.equal('baz');
+
+      done()
+    });
+  });
+});
