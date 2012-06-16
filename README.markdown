@@ -223,6 +223,7 @@ guard().frisk(input, function(err, result){
 
 Your custom validations can return multiple errors, if necessary:
 
+```javascript
 var myValidationFunction = function(input, cb){
   if(...){
     cb(); // passed!
@@ -230,6 +231,7 @@ var myValidationFunction = function(input, cb){
     cb(['error message 1', 'error message 2']); // failed...
   }
 };
+```
 
 ### Default Values
 
