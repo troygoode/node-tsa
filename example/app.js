@@ -20,7 +20,7 @@ app.post('/', personGuard().middleware(), function(req, res){
 });
 
 app.error(function(err, req, res, next){
-  res.render('index', {result: null, errors: tsa.flattenErrors(err)});
+  res.render('index', {result: null, errors: tsa.flattenErrors(err, {hash: true})});
 });
 
 app.listen(3000, function(){

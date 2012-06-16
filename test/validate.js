@@ -130,4 +130,31 @@ describe('Custom Validations', function(){
       done();
     });
   });
+
+  it('can return multiple errors', function(done){
+    //arrange
+    var v = function(json, cb){
+      cb(['error1', 'error2']);
+    };
+    var guard = tsa({
+      foo: tsa.validate(v)
+    });
+    var input = {foo: 'blah'};
+
+    //act
+    guard().frisk(input, function(err, result){
+      //assert
+      should.exist(err);
+      err.should.be.an.instanceof(Array);
+      err.length.should.equal(1);
+      err[0].key.should.equal('foo');
+      err[0].error.should.be.an.instanceof(Array);
+      err[0].error.length.should.equal(2);
+      err[0].error[0].should.equal('error1');
+      err[0].error[1].should.equal('error2');
+      should.not.exist(result);
+
+      done();
+    });
+  });
 });

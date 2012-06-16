@@ -4,35 +4,49 @@ html
     title Kiln Example
   body
 
-    if errors.length
+    if errors
       div
         p Errors!
         ul
-          for error in errors
-            li #{error.key}: #{error.error}
+          each error, key in errors
+            li #{key}: #{error.join(' ')}
 
     form(method='POST')
       div
         label(for='first') First
         input(type='text', name='first')
+        if errors['first']
+          span.error= errors['first'].join(' ')
       div
         label(for='middle') Middle
         input(type='text', name='middle')
+        if errors['middle']
+          span.error= errors['middle'].join(' ')
       div
         label(for='last') Last
         input(type='text', name='last')
+        if errors['last']
+          span.error= errors['last'].join(' ')
       div
         label(for='email') Email
         input(type='text', name='email')
+        if errors['email']
+          span.error= errors['email'].join(' ')
       div
         label(for='address[street1]') Street1
         input(type='text', name='address[street1]')
+        if errors['address[street1]']
+          span.error= errors['address[street1]'].join(' ')
       div
         label(for='address[street2]') Street2
         input(type='text', name='address[street2]')
+        if errors['address[street2]']
+          span.error= errors['address[street2]'].join(' ')
       div
         label(for='address[zip]') Zip
         input(type='text', name='address[zip]')
+        if errors['address[zip]']
+          span.error= errors['address[zip]'].join(' ')
       div
         input(type='submit', value='Submit')
 

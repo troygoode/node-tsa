@@ -15,7 +15,7 @@ var isEmail = function(input, cb){
     if(regex.test(input)){
       cb();
     }else{
-      cb('invalid email address');
+      cb(['Invalid email address.', 'Some other error, too.']);
     }
   }else{
     // no value was passed; defer to the 'required' validation
@@ -27,6 +27,6 @@ module.exports = tsa({
     first: tsa.required()
   , middle: tsa.transform(justFirstCharacter)
   , last: tsa.required()
-  , email: tsa.validate(isEmail)
+  , email: tsa.validate(isEmail, {required: true})
   , address: address()
 });
