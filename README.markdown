@@ -124,6 +124,24 @@ var person = tsa({
 });
 ```
 
+You can validate/transform/etc nested guards either at the definition level, or the usage level:
+
+```javascript
+// example of adding validations to guard definition
+var address = tsa({
+    street1: tsa.required()
+  , street2: tsa.optional()
+}, {validate: someValidationFunction});
+```
+
+```javascript
+// example of adding validations to guard usage
+var person = tsa({
+    name: tsa.required()
+  , address: address({validate: aDifferentValidationFunction})
+});
+```
+
 ### Required Fields
 
 ```javascript
@@ -298,6 +316,16 @@ method to get back something like this:
   , {key: 'address[street1]', error: 'Required field not provided.'}
   , {key: 'address[zip]', error: 'Required field not provided.'}
 ]
+```
+
+Passing `{hash: true}` into `tsa.flattenErrors` as the second argument results in:
+
+```javascript
+{
+    'first': ['Required field not provided.']
+  , 'address[street1]': ['Required field not provided.']
+  , 'address[zip]': ['Required field not provided.']
+}
 ```
 
 ## Test
