@@ -115,7 +115,6 @@ app.post('/foo', guard().middleware(function(err, req, res, next){
 ### Nested Guards
 
 ```javascript
-var tsa = require('tsa');
 var address = tsa({
     street1: tsa.required()
   , street2: tsa.optional()
@@ -129,7 +128,6 @@ var person = tsa({
 Nested guards can also be created inline:
 
 ```javascript
-var tsa = require('tsa');
 var person = tsa({
     name: tsa.required()
   , address: tsa({
@@ -160,7 +158,6 @@ var person = tsa({
 ### Required Properties
 
 ```javascript
-var tsa = require('tsa');
 var guard = tsa({
   property1: tsa.property({ required: true }) // or: tsa.required()
 });
@@ -183,7 +180,6 @@ var guard = tsa({
 ### Optional Properties
 
 ```javascript
-var tsa = require('tsa');
 var guard = tsa({
   property1: tsa.property() // or: tsa.optional()
 });
@@ -197,7 +193,6 @@ guard().frisk(input, function(err, result){
 ### Whitelisting
 
 ```javascript
-var tsa = require('tsa');
 var guard = tsa({
   property1: tsa.required()
 });
@@ -214,7 +209,6 @@ guard().frisk(input, function(err, result){
 ### Default Values
 
 ```javascript
-var tsa = require('tsa');
 var guard = tsa({
   foo: tsa.property({ default: 'bar' }) // or: tsa.default('bar')
 });
@@ -228,7 +222,6 @@ guard().frisk(input, function(err, result){
 Optionally, the default value can be a function which will be executed by tsa:
 
 ```javascript
-var tsa = require('tsa');
 var now = function(){
   return new Date();
 };
@@ -286,7 +279,6 @@ var guard = tsa({
 ### Custom Validations
 
 ```javascript
-var tsa = require('tsa');
 var mustBeUpper = function(input, cb){
   if(input.toUpperCase() === input){
     cb(); // yes, this is uppercase
@@ -319,7 +311,6 @@ var myValidationFunction = function(input, cb){
 ### Transformations
 
 ```javascript
-var tsa = require('tsa');
 var toUpper = function(input, cb){
   cb(null, input.toUpperCase());
 };
@@ -338,7 +329,6 @@ guard().frisk(input, function(err, result){
 Sanitizing a property runs a validation function against it, but rather than failing the guard if an error is reported that property is simply thrown away in the case of an error:
 
 ```javascript
-var tsa = require('tsa');
 var mustBeUpper = function(input, cb){
   if(input.toUpperCase() === input){
     cb(); // yes, this is uppercase
@@ -369,7 +359,6 @@ var guard = tsa({
 ### Rename Properties
 
 ```javascript
-var tsa = require('tsa');
 var guard = tsa({
   foo: tsa.property({ rename: 'bar' }) // or: tsa.rename('bar')
 });
@@ -385,7 +374,6 @@ guard().frisk(input, function(err, result){
 You can combine any and all of the above like so:
 
 ```javascript
-var tsa = require('tsa');
 var toUpper = function(input, cb){
   cb(null, input.toUpperCase());
 };
