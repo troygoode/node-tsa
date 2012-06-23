@@ -6,6 +6,28 @@ describe('Required Field', function(){
     bar: tsa.required()
   });
 
+  it('custom error message', function(done){
+    //arrange
+    var guard = tsa({
+        foo: tsa.property({ required: 'fail1!' })
+      , bar: tsa.required('fail2!')
+    });
+    var input = {};
+
+    //act
+    guard().frisk(input, function(err, result){
+      //assert
+      should.exist(err);
+      err[0].key.should.equal('foo');
+      err[0].error.should.equal('fail1!');
+      err[1].key.should.equal('bar');
+      err[1].error.should.equal('fail2!');
+      should.not.exist(result);
+
+      done();
+    });
+  });
+
   it('error array is returned if required property is not in input', function(done){
     //arrange
     var input = {

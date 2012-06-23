@@ -171,6 +171,15 @@ guard().frisk(input, function(err, result){
 });
 ```
 
+You can provide a custom error message like so:
+
+```javascript
+var guard = tsa({
+    example1: tsa.property({ required: 'fail!' })
+  , example2: tsa.required('fail!')
+});
+```
+
 ### Optional Properties
 
 ```javascript
