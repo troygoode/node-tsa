@@ -6,7 +6,7 @@ describe('Optional Field', function(){
     bar: tsa.optional()
   });
 
-  it('field is in whitelist', function(done){
+  it('property is in whitelist', function(done){
     //arrange
     var input = {
       bar: 'blah'
@@ -24,7 +24,7 @@ describe('Optional Field', function(){
     });
   });
 
-  it('field is not in whitelist', function(done){
+  it('property is not in whitelist', function(done){
     //arrange
     var input = {
       baz: 'blah'

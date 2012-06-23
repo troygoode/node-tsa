@@ -7,7 +7,7 @@ describe('Mix of Required & Optional Fields', function(){
     , bar2: tsa.optional()
   });
 
-  it('works when all fields are present', function(done){
+  it('works when all properties are present', function(done){
     //arrange
     var input = {
         bar1: 'bar1'
@@ -26,7 +26,7 @@ describe('Mix of Required & Optional Fields', function(){
     });
   });
 
-  it('works when only required field is present', function(done){
+  it('works when only required property is present', function(done){
     //arrange
     var input = {
       bar1: 'bar1'
@@ -44,7 +44,7 @@ describe('Mix of Required & Optional Fields', function(){
     });
   });
 
-  it('reports error when only optional field is present', function(done){
+  it('reports error when only optional property is present', function(done){
     //arrange
     var input = {
       bar2: 'bar2'
@@ -60,7 +60,7 @@ describe('Mix of Required & Optional Fields', function(){
     });
   });
 
-  it('excludes non-whitelisted field', function(done){
+  it('excludes non-whitelisted property', function(done){
     //arrange
     var input = {
         bar1: 'bar1'

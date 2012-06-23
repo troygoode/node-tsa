@@ -6,7 +6,7 @@ describe('Default Values', function(){
     foo: tsa.property({ default: 'bar' })
   });
 
-  it('returns the default value for fields when the field isn\'t supplied', function(done){
+  it('returns the default value for properties when the property isn\'t supplied', function(done){
     //arrange
     var input = {};
 
@@ -22,7 +22,7 @@ describe('Default Values', function(){
     });
   });
 
-  it('returns the supplied value for fields instead of default when the field IS supplied', function(done){
+  it('returns the supplied value for properties instead of default when the property IS supplied', function(done){
     //arrange
     var input = {
       foo: 'baz'

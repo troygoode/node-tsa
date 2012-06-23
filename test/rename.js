@@ -6,7 +6,7 @@ describe('Rename Field', function(){
     foo: tsa.property({ rename: 'bar' })
   });
 
-  it('renames incoming field', function(done){
+  it('renames incoming property', function(done){
     //arrange
     var input = {
       foo: 'blah'

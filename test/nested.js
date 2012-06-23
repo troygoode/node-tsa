@@ -32,7 +32,7 @@ describe('Nested Guards', function(){
     });
   });
 
-  it('returns error array if nested required field isn\'t supplied', function(done){
+  it('returns error array if nested required property isn\'t supplied', function(done){
     //arrange
     var input = {
       foo: 'foo'
@@ -54,7 +54,7 @@ describe('Nested Guards', function(){
     });
   });
 
-  it('returns array of errors if multiple required field aren\'t supplied', function(done){
+  it('returns array of errors if multiple required property aren\'t supplied', function(done){
     //arrange
     var input = {
       foo: undefined

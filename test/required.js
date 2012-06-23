@@ -6,7 +6,7 @@ describe('Required Field', function(){
     bar: tsa.required()
   });
 
-  it('error array is returned if required field is not in input', function(done){
+  it('error array is returned if required property is not in input', function(done){
     //arrange
     var input = {
       baz: 'blah'

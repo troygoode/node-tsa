@@ -15,7 +15,7 @@ describe('Optional Field', function(){
     bar: tsa.optional()
   });
 
-  it('field is used if supplied', function(done){
+  it('property is used if supplied', function(done){
     //arrange
     var input = {
       bar: 'blah'
@@ -32,7 +32,7 @@ describe('Optional Field', function(){
     });
   });
 
-  it('field is ignored if not supplied', function(done){
+  it('property is ignored if not supplied', function(done){
     //arrange
     var input = {};
 
