@@ -207,7 +207,8 @@ TSA ships with a few validations built-in. Here are some examples:
 
 ```javascript
 var guard = tsa({
- foo: tsa.require({ validate: tsa.validate.boolean() })
+   foo: tsa.require({ validate: tsa.validate.boolean() })
+ , bar: tsa.require({ validate: tsa.validate.boolean('The value "%1" is not a boolean.') // <- custome error message
 });
 ```
 ```javascript
