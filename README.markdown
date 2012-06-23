@@ -21,6 +21,7 @@ It has been designed with usage in an Express-based JSON REST API in mind, and a
 * Creating Guards : [Required Fields](#required-fields)
 * Creating Guards : [Optional Fields](#optional-fields)
 * Creating Guards : [Whitelisting](#whitelisting)
+* Creating Guards : [Built-In Validations](#built-in-validations)
 * Creating Guards : [Custom Validations](#custom-validations)
 * Creating Guards : [Default Values](#default-values)
 * Creating Guards : [Transformations](#transformations)
@@ -197,6 +198,41 @@ var input = {
 guard().frisk(input, function(err, result){
   // result.property1 === 'foo'
   // result has no property2 key
+});
+```
+
+### Built-In Validations
+
+TSA ships with a few validations built-in. Here are some examples:
+
+```
+var guard = tsa({
+ foo: tsa.require({ validate: tsa.validate.boolean() })
+});
+```
+```
+var guard = tsa({
+ foo: tsa.require({ validate: tsa.validate.true() })
+});
+```
+```
+var guard = tsa({
+ foo: tsa.require({ validate: tsa.validate.false() })
+});
+```
+```
+var guard = tsa({
+ foo: tsa.require({ validate: tsa.validate.numeric() })
+});
+```
+```
+var guard = tsa({
+ foo: tsa.require({ validate: tsa.validate.range(0, 10) })
+});
+```
+```
+var guard = tsa({
+ foo: tsa.require({ validate: tsa.validate.regex(/^bar$/g) })
 });
 ```
 
