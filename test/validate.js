@@ -10,7 +10,7 @@ describe('Custom Validations', function(){
     }
   };
   var guard = tsa({
-    foo: tsa.field({ validate: mustBeUpper })
+    foo: tsa.property({ validate: mustBeUpper })
   });
 
   it('succeeds properly', function(done){

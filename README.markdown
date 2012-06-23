@@ -18,14 +18,14 @@ It has been designed with usage in an Express-based JSON REST API in mind, and a
 * Usage : [Using TSA via Express Middleware](#using-tsa-via-express-middleware)
 * [Creating Guards](#creating-guards)
 * Creating Guards : [Nested Guards](#nested-guards)
-* Creating Guards : [Required Fields](#required-fields)
-* Creating Guards : [Optional Fields](#optional-fields)
+* Creating Guards : [Required Properties](#required-properties)
+* Creating Guards : [Optional Properties](#optional-properties)
 * Creating Guards : [Whitelisting](#whitelisting)
 * Creating Guards : [Built-In Validations](#built-in-validations)
 * Creating Guards : [Custom Validations](#custom-validations)
 * Creating Guards : [Default Values](#default-values)
 * Creating Guards : [Transformations](#transformations)
-* Creating Guards : [Rename Fields](#rename-fields)
+* Creating Guards : [Rename Properties](#rename-properties)
 * Creating Guards : [Combinations](#combinations)
 * Creating Guards : [Error Handling](#error-handling)
 * [Test](#test)
@@ -156,26 +156,26 @@ var person = tsa({
 });
 ```
 
-### Required Fields
+### Required Properties
 
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  property1: tsa.field({ required: true }) // or: tsa.required()
+  property1: tsa.property({ required: true }) // or: tsa.required()
 });
 var input = {};
 guard().frisk(input, function(err, result){
   // err === instanceof Array
-  // err[0] === {key: 'property1', error: 'required field property1 not supplied'}
+  // err[0] === {key: 'property1', error: 'Required property property1 not supplied.'}
 });
 ```
 
-### Optional Fields
+### Optional Properties
 
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  property1: tsa.field() // or: tsa.optional()
+  property1: tsa.property() // or: tsa.optional()
 });
 var input = {};
 guard().frisk(input, function(err, result){
@@ -240,7 +240,7 @@ var mustBeUpper = function(input, cb){
   }
 };
 var guard = tsa({
-  foo: tsa.field({ validate: mustBeUpper }) // or: tsa.validate(mustBeUpper)
+  foo: tsa.property({ validate: mustBeUpper }) // or: tsa.validate(mustBeUpper)
 });
 var input = { foo: 'bar' };
 guard().frisk(input, function(err, result){
@@ -266,7 +266,7 @@ var myValidationFunction = function(input, cb){
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  foo: tsa.field({ default: 'bar' }) // or: tsa.default('bar')
+  foo: tsa.property({ default: 'bar' }) // or: tsa.default('bar')
 });
 var input = {};
 guard().frisk(input, function(err, result){
@@ -283,7 +283,7 @@ var now = function(){
   return new Date();
 };
 var guard = tsa({
-  foo: tsa.field({ default: now }) // or: tsa.default(now)
+  foo: tsa.property({ default: now }) // or: tsa.default(now)
 });
 var input = {};
 guard().frisk(input, function(err, result){
@@ -300,7 +300,7 @@ var toUpper = function(input, cb){
   cb(null, input.toUpperCase());
 };
 var guard = tsa({
-  foo: tsa.field({ transform: toUpper }) // or: tsa.transform(toUpper)
+  foo: tsa.property({ transform: toUpper }) // or: tsa.transform(toUpper)
 });
 var input = { foo: 'bar' };
 guard().frisk(input, function(err, result){
@@ -309,12 +309,12 @@ guard().frisk(input, function(err, result){
 });
 ```
 
-### Rename Fields
+### Rename Properties
 
 ```javascript
 var tsa = require('tsa');
 var guard = tsa({
-  foo: tsa.field({ rename: 'bar' }) // or: tsa.rename('bar')
+  foo: tsa.property({ rename: 'bar' }) // or: tsa.rename('bar')
 });
 var input = { foo: 'blah' };
 guard().frisk(input, function(err, result){
@@ -333,7 +333,7 @@ var toUpper = function(input, cb){
   cb(null, input.toUpperCase());
 };
 var guard = tsa({
-  foo: tsa.field({ required: true, transform: toUpper })
+  foo: tsa.property({ required: true, transform: toUpper })
   // or: tsa.required({ transform: toUpper })
   // or: tsa.transform(toUpper, {required: true})
 });
@@ -350,10 +350,10 @@ Errors for nested structures are returned like so:
 
 ```javascript
 [
-    {key: 'first', error: 'Required field not provided.'}
+    {key: 'first', error: 'Required property not provided.'}
   , {key: 'address', error: [
-        {key: 'street1', error: 'Required field not provided.'}
-      , {key: 'zip', error: 'Required field not provided.'}
+        {key: 'street1', error: 'Required property not provided.'}
+      , {key: 'zip', error: 'Required property not provided.'}
     ]}
 ]
 ```
@@ -365,9 +365,9 @@ method to get back something like this:
 
 ```javascript
 [
-    {key: 'first', error: 'Required field not provided.'}
-  , {key: 'address[street1]', error: 'Required field not provided.'}
-  , {key: 'address[zip]', error: 'Required field not provided.'}
+    {key: 'first', error: 'Required property not provided.'}
+  , {key: 'address[street1]', error: 'Required property not provided.'}
+  , {key: 'address[zip]', error: 'Required property not provided.'}
 ]
 ```
 
@@ -375,9 +375,9 @@ Passing `{hash: true}` into `tsa.flattenErrors` as the second argument results i
 
 ```javascript
 {
-    'first': ['Required field not provided.']
-  , 'address[street1]': ['Required field not provided.']
-  , 'address[zip]': ['Required field not provided.']
+    'first': ['Required property not provided.']
+  , 'address[street1]': ['Required property not provided.']
+  , 'address[zip]': ['Required property not provided.']
 }
 ```
 

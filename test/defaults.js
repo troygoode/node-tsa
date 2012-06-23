@@ -3,7 +3,7 @@ var should = require('should')
 
 describe('Default Values', function(){
   var guard = tsa({
-    foo: tsa.field({ default: 'bar' })
+    foo: tsa.property({ default: 'bar' })
   });
 
   it('returns the default value for fields when the field isn\'t supplied', function(done){
@@ -43,7 +43,7 @@ describe('Default Values', function(){
   it('supports executing a function to retrieve default value', function(done){
     //arrange
     var guard = tsa({
-      foo: tsa.field({ default: function(){ return 'bar'; } })
+      foo: tsa.property({ default: function(){ return 'bar'; } })
     });
     var input = {};
 

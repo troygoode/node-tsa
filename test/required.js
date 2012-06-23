@@ -18,7 +18,7 @@ describe('Required Field', function(){
       should.exist(err);
       err.length.should.equal(1);
       err[0].key.should.equal('bar');
-      err[0].error.should.equal('Required field not provided.');
+      err[0].error.should.equal('Required property not provided.');
       should.not.exist(result);
 
       done();

@@ -8,7 +8,7 @@ describe('Transformations', function(){
       cb(null, value.toUpperCase());
     };
     var guard = tsa({
-      foo: tsa.field({ transform: toUpper })
+      foo: tsa.property({ transform: toUpper })
     });
     var input = { foo: 'bar' };
 
@@ -30,7 +30,7 @@ describe('Transformations', function(){
       cb('some error');
     };
     var guard = tsa({
-      foo: tsa.field({ transform: error })
+      foo: tsa.property({ transform: error })
     });
     var input = { foo: 'bar' };
 

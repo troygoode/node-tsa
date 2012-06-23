@@ -3,7 +3,7 @@ var should = require('should')
 
 describe('Rename Field', function(){
   var guard = tsa({
-    foo: tsa.field({ rename: 'bar' })
+    foo: tsa.property({ rename: 'bar' })
   });
 
   it('renames incoming field', function(done){
