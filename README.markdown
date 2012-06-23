@@ -205,32 +205,32 @@ guard().frisk(input, function(err, result){
 
 TSA ships with a few validations built-in. Here are some examples:
 
-```
+```javascript
 var guard = tsa({
  foo: tsa.require({ validate: tsa.validate.boolean() })
 });
 ```
-```
+```javascript
 var guard = tsa({
  foo: tsa.require({ validate: tsa.validate.true() })
 });
 ```
-```
+```javascript
 var guard = tsa({
  foo: tsa.require({ validate: tsa.validate.false() })
 });
 ```
-```
+```javascript
 var guard = tsa({
  foo: tsa.require({ validate: tsa.validate.numeric() })
 });
 ```
-```
+```javascript
 var guard = tsa({
  foo: tsa.require({ validate: tsa.validate.range(0, 10) })
 });
 ```
-```
+```javascript
 var guard = tsa({
  foo: tsa.require({ validate: tsa.validate.regex(/^bar$/g) })
 });
