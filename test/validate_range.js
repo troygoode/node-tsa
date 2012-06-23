@@ -106,3 +106,45 @@ describe('Validations: Range', function(){
     });
   });
 });
+
+describe('Validations: Min', function(){
+  var guard = tsa({
+    foo: tsa.required({ validate: tsa.validate.min(0) })
+  });
+
+  it('positive case', function(done){
+    //arrange
+    var input = { foo: 1 };
+
+    //act
+    guard().frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+      result.foo.should.equal(1);
+
+      done();
+    });
+  });
+});
+
+describe('Validations: Max', function(){
+  var guard = tsa({
+    foo: tsa.required({ validate: tsa.validate.max(10) })
+  });
+
+  it('positive case', function(done){
+    //arrange
+    var input = { foo: 9 };
+
+    //act
+    guard().frisk(input, function(err, result){
+      //assert
+      should.not.exist(err);
+      should.exist(result);
+      result.foo.should.equal(9);
+
+      done();
+    });
+  });
+});

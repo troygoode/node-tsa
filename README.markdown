@@ -208,32 +208,23 @@ TSA ships with a few validations built-in. Here are some examples:
 ```javascript
 var guard = tsa({
    foo: tsa.require({ validate: tsa.validate.boolean() })
- , bar: tsa.require({ validate: tsa.validate.boolean('The value "%1" is not a boolean.') // <- custome error message
+ , bar: tsa.require({ validate: tsa.validate.boolean('The value "%1" is not a boolean.') }) // <- custom error message
+ , baz: tsa.require({ validate: tsa.validate.true() })
+ , boo: tsa.require({ validate: tsa.validate.false() })
 });
 ```
 ```javascript
 var guard = tsa({
- foo: tsa.require({ validate: tsa.validate.true() })
+   foo: tsa.require({ validate: tsa.validate.numeric() })
+ , bar: tsa.require({ validate: tsa.validate.range(0, 10) })
+ , baz: tsa.require({ validate: tsa.validate.min(0) })
+ , boo: tsa.require({ validate: tsa.validate.max(10) })
 });
 ```
 ```javascript
 var guard = tsa({
- foo: tsa.require({ validate: tsa.validate.false() })
-});
-```
-```javascript
-var guard = tsa({
- foo: tsa.require({ validate: tsa.validate.numeric() })
-});
-```
-```javascript
-var guard = tsa({
- foo: tsa.require({ validate: tsa.validate.range(0, 10) })
-});
-```
-```javascript
-var guard = tsa({
- foo: tsa.require({ validate: tsa.validate.regex(/^bar$/g) })
+   foo: tsa.require({ validate: tsa.validate.regex(/^bar$/g) })
+ , foo: tsa.require({ validate: tsa.validate.regex(/^bar$/g, 'fail!') }) // <- custom error message
 });
 ```
 
