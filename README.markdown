@@ -216,9 +216,23 @@ var guard = tsa({
 ```javascript
 var guard = tsa({
    foo: tsa.require({ validate: tsa.validate.numeric() })
+ , foo2: tsa.require({ validate: tsa.validate.numeric('fail!') }) // <- custom error message
  , bar: tsa.require({ validate: tsa.validate.range(0, 10) })
+ , bar2: tsa.require({ validate: tsa.validate.range(0, 10, {
+       invalid: 'custom error message'
+     , below: 'custom error message'
+     , above: 'custom error message'
+   }) })
  , baz: tsa.require({ validate: tsa.validate.min(0) })
+ , baz2: tsa.require({ validate: tsa.validate.min(0, {
+       invalid: 'custom error message'
+     , below: 'custom error message'
+   }) })
  , boo: tsa.require({ validate: tsa.validate.max(10) })
+ , boo2: tsa.require({ validate: tsa.validate.max(10,
+       invalid: 'custom error message'
+     , above: 'custom error message'
+   }) })
 });
 ```
 ```javascript
