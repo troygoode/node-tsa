@@ -21,10 +21,11 @@ It has been designed with usage in an Express-based JSON REST API in mind, and a
 * Creating Guards : [Required Properties](#required-properties)
 * Creating Guards : [Optional Properties](#optional-properties)
 * Creating Guards : [Whitelisting](#whitelisting)
+* Creating Guards : [Default Values](#default-values)
 * Creating Guards : [Built-In Validations](#built-in-validations)
 * Creating Guards : [Custom Validations](#custom-validations)
-* Creating Guards : [Default Values](#default-values)
 * Creating Guards : [Transformations](#transformations)
+* Creating Guards : [Sanitization](#sanitization)
 * Creating Guards : [Rename Properties](#rename-properties)
 * Creating Guards : [Combinations](#combinations)
 * Creating Guards : [Error Handling](#error-handling)
@@ -201,6 +202,37 @@ guard().frisk(input, function(err, result){
 });
 ```
 
+### Default Values
+
+```javascript
+var tsa = require('tsa');
+var guard = tsa({
+  foo: tsa.property({ default: 'bar' }) // or: tsa.default('bar')
+});
+var input = {};
+guard().frisk(input, function(err, result){
+  // err === null
+  // result.foo === 'bar'
+});
+```
+
+Optionally, the default value can be a function which will be executed by tsa:
+
+```javascript
+var tsa = require('tsa');
+var now = function(){
+  return new Date();
+};
+var guard = tsa({
+  foo: tsa.property({ default: now }) // or: tsa.default(now)
+});
+var input = {};
+guard().frisk(input, function(err, result){
+  // err === null
+  // result.foo === a Date object
+});
+```
+
 ### Built-In Validations
 
 TSA ships with a few validations built-in. Here are some examples:
@@ -275,37 +307,6 @@ var myValidationFunction = function(input, cb){
 };
 ```
 
-### Default Values
-
-```javascript
-var tsa = require('tsa');
-var guard = tsa({
-  foo: tsa.property({ default: 'bar' }) // or: tsa.default('bar')
-});
-var input = {};
-guard().frisk(input, function(err, result){
-  // err === null
-  // result.foo === 'bar'
-});
-```
-
-Optionally, the default value can be a function which will be executed by tsa:
-
-```javascript
-var tsa = require('tsa');
-var now = function(){
-  return new Date();
-};
-var guard = tsa({
-  foo: tsa.property({ default: now }) // or: tsa.default(now)
-});
-var input = {};
-guard().frisk(input, function(err, result){
-  // err === null
-  // result.foo === a Date object
-});
-```
-
 ### Transformations
 
 ```javascript
@@ -320,6 +321,39 @@ var input = { foo: 'bar' };
 guard().frisk(input, function(err, result){
   // err === null
   // result.foo === 'BAR'
+});
+```
+
+### Sanitization
+
+Sanitizing a property runs a validation function against it, but rather than failing the guard if an error is reported that property is simply thrown away in the case of an error:
+
+```javascript
+var tsa = require('tsa');
+var mustBeUpper = function(input, cb){
+  if(input.toUpperCase() === input){
+    cb(); // yes, this is uppercase
+  }else{
+    cb('not uppercase!'); // oh noes!
+  }
+};
+var guard = tsa({
+    foo: tsa.property({ sanitize: mustBeUpper }) // or: tsa.sanitize(mustBeUpper)
+  , fizz: tsa.sanitize(mustBeUpper)
+});
+var input = { foo: 'bar', fizz: 'BANG' };
+guard().frisk(input, function(err, result){
+  // err === null
+  // result.foo === undefined
+  // result.fizz === 'BANG'
+});
+```
+
+Note that you can run TSA's built-in validations through sanitize:
+
+```javascript
+var guard = tsa({
+  foo: tsa.sanitize(tsa.validate.regex(/^bar$/g))
 });
 ```
 
