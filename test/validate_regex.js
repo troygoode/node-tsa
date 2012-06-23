@@ -40,7 +40,7 @@ describe('Validations: Regex', function(){
   it('custom error message', function(done){
     //arrange
     var guard = tsa({
-      foo: tsa.required({ validate: tsa.validate.regex(/^bar$/, 'well... crap') })
+      foo: tsa.required({ validate: tsa.validate.regex(/^bar$/, 'well... crap (%1)') })
     });
     var input = { foo: 'baz' };
 
@@ -49,7 +49,7 @@ describe('Validations: Regex', function(){
       //assert
       should.exist(err);
       err[0].key.should.equal('foo');
-      err[0].error.should.equal('well... crap');
+      err[0].error.should.equal('well... crap (baz)');
       should.not.exist(result);
 
       done();
