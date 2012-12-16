@@ -33,7 +33,7 @@ It has been designed with usage in an Express-based JSON REST API in mind, and a
 * [License](#license)
 * [Author](#author)
 
-## Installation
+## Installation (via [npm](https://npmjs.org/package/tsa))
 
 ```bash
 $ npm install tsa
