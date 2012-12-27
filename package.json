@@ -5,6 +5,9 @@
   , "description": "Guard your REST API with a bit of fascism."
   , "keywords": ["JSON", "REST", "API", "guard", "whitelist", "transform", "validate", "validation"]
   , "homepage": "https://github.com/troygoode/node-tsa"
+  , "scripts": {
+      "test": "mocha"
+  }
   , "repository": {
       "type": "git"
     , "url": "git://github.com/troygoode/node-tsa.git"
