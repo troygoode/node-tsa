@@ -10,7 +10,7 @@ TSA is a node.js library designed to take JSON input and:
 
 It has been designed with usage in an Express-based JSON REST API in mind, and allows you to easily pass it into your route as middleware.
 
-(TODO: insert Travis thing here)
+[![build status](https://secure.travis-ci.org/TroyGoode/node-tsa.png)](http://travis-ci.org/TroyGoode/node-tsa)
 
 ## Table of Contents
 
